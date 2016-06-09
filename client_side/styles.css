@@ -1,0 +1,25 @@
+body {
+	background-color:cyan;
+}
+
+h1 {
+	text-align: center;
+	font-family: Arial;
+	color: black;
+}
+
+table, td, tbody {
+	text-align: center;
+	border: 2px bold;
+}
+
+tr, td {
+	font-size: 100px;
+	border: 2px bold;
+	width: 20px;
+	height: 20px;
+}
+
+button{
+	text-align: center;
+}
