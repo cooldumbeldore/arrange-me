@@ -10,16 +10,37 @@ h1 {
 
 table, td, tbody {
 	text-align: center;
-	border: 2px bold;
 }
 
 tr, td {
-	font-size: 100px;
-	border: 2px bold;
-	width: 20px;
-	height: 20px;
 }
 
-button{
+.scramble-button{
 	text-align: center;
+	float: middle;
+	font-size: 20px;
+	color: purple;
+	background-color: violet;
+	font-family: Arial;
+}
+
+.tile{
+	font-size: 100px;
+	color: red;
+	width: 40px;
+}	
+
+.hidden-tile{
+	visibility: hidden;
+}
+
+.hidden{
+	visibility: hidden;
+}
+
+.win-message{
+	font-size: 20px;
+	font-family: Arial;
+	color: yellow;
+	background-color: red;
 }

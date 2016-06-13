@@ -3,32 +3,41 @@
 	<head>
 		<title>Arrange me website</title>
 		<link rel="stylesheet" href="styles.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 		<script src="main.js"></script>
 	</head>
 	<body>
 	<h1>Arrange me game</h1>
 
-	<table align="center" border=1>
+	<table align="center" border="5px" bordercolor="green" width="600px" height="600px">
 		<tbody>
 			<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
+				<td class="tile" id="tile1">1</td>
+				<td class="tile" id="tile2">2</td>
+				<td class="tile" id="tile3">3</td>
 			</tr>
 			<tr>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
+				<td class="tile" id="tile4">4</td>
+				<td class="tile" id="tile5">5</td>
+				<td class="tile" id="tile6">6</td>
 			</tr>
 			<tr>
-				<td>7</td>
-				<td>8</td>
-				<td>9</td>
+				<td class="tile" id="tile7">7</td>
+				<td class="tile" id="tile8">8</td>
+				<td class="tile" id="tile9">9</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<button text-align="center">Scramble</button>
+	
+	<div align="center">
+		<br><br>
+		<button class="scramble-button" text-align="center">Scramble</button>
+	</div>
+
+	<br><br><br><br>
+	<div class="win-message" align="center">YOU HAVE WON!</div>
+	
 
 	</body>
 </html>	
