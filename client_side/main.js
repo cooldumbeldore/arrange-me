@@ -213,7 +213,7 @@ function generate_board(dim){
 		tr.css('position', 'static');
 
 	    for (var j = 1; j <= dim; j++){
-	    	tile_index = dim*i + j - dim;
+	    	tile_index = dim * i + j - dim;
 
 	    	var td = $("<td></td>").appendTo(tr);
 	    	td.attr('id', 'tile'+tile_index);
@@ -224,8 +224,8 @@ function generate_board(dim){
 
 	    	var content = $('<div></div>').appendTo(td);
 	    	content.addClass("content");
-	    	x_ratio = i * 100.0 / dim;
-	    	y_ratio = j * 100.0 / dim;
+	    	x_ratio = (i - 1) * 100.0 / (dim - 1);
+	    	y_ratio = (j - 1) * 100.0 / (dim - 1);
 	    	content.css('background-position', y_ratio+'% ' +x_ratio+'%');
 
 	    	var span = $('<span>' +tile_index+ '</span>').appendTo(content);
@@ -239,7 +239,11 @@ function generate_board(dim){
 
 function main(){
 	// input params
-	global_dim = 3 //parseInt(prompt("board dim:"))
+	global_dim = parseInt(prompt("board dim:"))
+	if(!(global_dim > 0 && global_dim <= 100)){
+		alert("Not a valid dim choice!");
+		return;
+	}
 	missing_tile_index = global_dim * global_dim //parseInt(prompt("missing tile index:"))
 	global_hidden_tile_index = missing_tile_index
 	//build board
