@@ -77,12 +77,18 @@ function update_move_counter(){
 	$("#move-counter").text("Move Count: " + global_moves.length)
 }
 
+function swap_content(tile_index_1, tile_index_2){
+	var temp_text_1 = $('#tile'+tile_index_1).find("span").text()
+	$('#tile'+tile_index_1).find("span").text($('#tile'+tile_index_2).find("span").text())
+	$('#tile'+tile_index_2).find("span").text(temp_text_1)
+
+
+}
+
 function advance_move(tile_index, hidden_tile_index){
 	$("#tile"+hidden_tile_index).removeClass("hidden-tile")
 
-	var temp_text = $('#tile'+hidden_tile_index).find("span").text()
-	$('#tile'+hidden_tile_index).find("span").text($('#tile'+tile_index).find("span").text())
-	$('#tile'+tile_index).find("span").text(temp_text)
+	swap_content(tile_index, hidden_tile_index)
 
 	$('#tile'+tile_index).addClass("hidden-tile")
 	generate_all_events(tile_index)
@@ -95,9 +101,7 @@ function advance_move(tile_index, hidden_tile_index){
 function undo_move(tile_index, hidden_tile_index){
 	$("#tile"+hidden_tile_index).addClass("hidden-tile")
 
-	var temp_text = $('#tile'+hidden_tile_index).find("span").text()
-	$('#tile'+hidden_tile_index).find("span").text($('#tile'+tile_index).find("span").text())
-	$('#tile'+tile_index).find("span").text(temp_text)
+	swap_content(tile_index, hidden_tile_index)
 
 	$('#tile'+tile_index).removeClass("hidden-tile")
 	generate_all_events(hidden_tile_index)
@@ -216,9 +220,6 @@ function generate_board(dim){
 	table.appendChild(tbody);
 	var table_div = document.getElementById('table-div');
 	table_div.appendChild(table);
-	//document.body.appendChild(table);
-
-	document.getElementById('tile1').style.clip = "rect(5px, 75px, 75px, 0px)";
 
 }
 
