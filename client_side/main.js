@@ -127,12 +127,15 @@ function undo_last_move(){
 
 function event_generator(tile_index, hidden_tile_index){
 	return function(){
-		clear_all_events()
+		
+		clear_all_events();
 
-		advance_move(tile_index, hidden_tile_index)
+		advance_move(tile_index, hidden_tile_index);
+
+		rotate(tile_index);
 
 		if (is_win()){
-			handle_win()
+			handle_win();
 		}
 	}
 }
@@ -236,6 +239,19 @@ function generate_board(dim){
 
 }
 
+
+function rotate(tile_index){
+	cls_name = "rotateIn"
+	$('#tile'+tile_index).addClass("animated");
+	//$('#tile'+tile_index).removeClass("infinite");
+	$('#tile'+tile_index).addClass(cls_name);
+
+	setTimeout(function(){
+		$('#tile'+tile_index).removeClass("animated");
+		//$('#tile'+tile_index).removeClass("infinite");
+		$('#tile'+tile_index).removeClass(cls_name);
+	}, 1000);
+}
 
 function main(){
 	// input params
