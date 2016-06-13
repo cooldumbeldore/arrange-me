@@ -15,7 +15,7 @@ table, td, tbody {
 tr, td {
 }
 
-.scramble-button{
+.menu-button{
 	text-align: center;
 	float: middle;
 	font-size: 20px;
@@ -25,9 +25,14 @@ tr, td {
 }
 
 .tile{
-	font-size: 100px;
+	background-image : url("daisy-flower.jpg");
+	
+}
+
+.tile span{
+	font-size: 50px;
 	color: red;
-	width: 40px;
+	//visibility: hidden;
 }	
 
 .hidden-tile{
@@ -43,4 +48,12 @@ tr, td {
 	font-family: Arial;
 	color: yellow;
 	background-color: red;
+}
+
+#move-counter{
+	font-size: 20px;
+	font-family: Arial;
+	color: #ffe6e6;
+	background-color: blue;
+	width : 300px;
 }

@@ -9,33 +9,20 @@
 	<body>
 	<h1>Arrange me game</h1>
 
-	<table align="center" border="5px" bordercolor="green" width="600px" height="600px">
-		<tbody>
-			<tr>
-				<td class="tile" id="tile1">1</td>
-				<td class="tile" id="tile2">2</td>
-				<td class="tile" id="tile3">3</td>
-			</tr>
-			<tr>
-				<td class="tile" id="tile4">4</td>
-				<td class="tile" id="tile5">5</td>
-				<td class="tile" id="tile6">6</td>
-			</tr>
-			<tr>
-				<td class="tile" id="tile7">7</td>
-				<td class="tile" id="tile8">8</td>
-				<td class="tile" id="tile9">9</td>
-			</tr>
-		</tbody>
-	</table>
-
-	
-	<div align="center">
-		<br><br>
-		<button class="scramble-button" text-align="center">Scramble</button>
+	<div id="table-div">
+		
 	</div>
 
-	<br><br><br><br>
+	<div align="center">
+		<br><br>
+		<button id="scramble-button" class="menu-button" text-align="center">Scramble</button>
+		<br><br>
+		<button id="undo-button" class="menu-button" text-align="center">Undo</button>
+		<br><br>
+		<div id="move-counter">Move Count: 0</div>
+	</div>
+
+	<br><br>
 	<div class="win-message" align="center">YOU HAVE WON!</div>
 	
 
