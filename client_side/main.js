@@ -78,10 +78,16 @@ function update_move_counter(){
 }
 
 function swap_content(tile_index_1, tile_index_2){
-	var temp_text_1 = $('#tile'+tile_index_1).find("span").text()
-	$('#tile'+tile_index_1).find("span").text($('#tile'+tile_index_2).find("span").text())
-	$('#tile'+tile_index_2).find("span").text(temp_text_1)
 
+	var tile_1_html = $('#tile'+tile_index_1).html();
+    var tile_2_html = $('#tile'+tile_index_2).html();
+
+    $('#tile'+tile_index_1).html(tile_2_html);
+    $('#tile'+tile_index_2).html(tile_1_html);
+
+	//var content_1 = $('#tile'+tile_index_1).find(".content").html()
+	//$('#tile'+tile_index_1).find(".content").html($('#tile'+tile_index_2).find(".content").html())
+	//$('#tile'+tile_index_2).find(".content").html(content_1)
 
 }
 
@@ -190,43 +196,50 @@ function scramble_board(){
 
 function generate_board(dim){
 	
-	var table = document.createElement('table');
-	table.setAttribute("align", "center");
-	table.setAttribute("border", "5px");
-	table.setAttribute("bordercolor", "green");
-	table.setAttribute("width", "600px");
-	table.setAttribute("height", "600px");
+	$('#table-div').append("<table></table>");
 
-	//
-	//  width="600px" height="600px">
-	var tbody = document.createElement('tbody');
-	for (var i = 1; i <= dim; i++){
-	    var tr = document.createElement('tr');   
-
-	    //clip: rect(0px,60px,200px,0px);
-	    for (var j = 1; j <= dim; j++){
-	    	td = document.createElement('td');
-	    	tile_index = dim*i + j - dim
-	    	td.setAttribute("id", "tile"+tile_index);
-	    	td.setAttribute("class", "tile");
-	    	span = document.createElement('span');
-	    	span.appendChild(document.createTextNode(tile_index));
-	    	td.appendChild(span);
-	    	tr.appendChild(td)
-	    }
-	    tbody.appendChild(tr);
-	}
+	$('#table-div table').attr("align", "center");
+	$('#table-div table').attr("border", "5px");
+	$('#table-div table').attr("bordercolor", "green");
+	$('#table-div table').attr("width", "600px");
+	$('#table-div table').attr("height", "600px");
 	
-	table.appendChild(tbody);
-	var table_div = document.getElementById('table-div');
-	table_div.appendChild(table);
+	$('#table-div table').append('<tbody></tbody>');
+	$('#table-div table tbody').css('position', 'static');
+
+	for (var i = 1; i <= dim; i++){
+
+		var tr = $("<tr></tr>").appendTo('#table-div table tbody');
+		tr.css('position', 'static');
+
+	    for (var j = 1; j <= dim; j++){
+	    	tile_index = dim*i + j - dim;
+
+	    	var td = $("<td></td>").appendTo(tr);
+	    	td.attr('id', 'tile'+tile_index);
+	    	td.addClass("tile");
+	    	td.css('position', 'static');
+
+
+
+	    	var content = $('<div></div>').appendTo(td);
+	    	content.addClass("content");
+	    	x_ratio = i * 100.0 / dim;
+	    	y_ratio = j * 100.0 / dim;
+	    	content.css('background-position', y_ratio+'% ' +x_ratio+'%');
+
+	    	var span = $('<span>' +tile_index+ '</span>').appendTo(content);
+	    	
+	    	
+	    }
+	}
 
 }
 
 
 function main(){
 	// input params
-	global_dim = parseInt(prompt("board dim:"))
+	global_dim = 3 //parseInt(prompt("board dim:"))
 	missing_tile_index = global_dim * global_dim //parseInt(prompt("missing tile index:"))
 	global_hidden_tile_index = missing_tile_index
 	//build board

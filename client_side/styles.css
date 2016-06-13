@@ -25,14 +25,20 @@ tr, td {
 }
 
 .tile{
-	background-image : url("daisy-flower.jpg");
 	
+}
+
+.content{
+	background-image : url("daisy-flower.jpg");
+	position:relative;
+	height:100%;
+	width:100%;
 }
 
 .tile span{
 	font-size: 50px;
 	color: red;
-	//visibility: hidden;
+	visibility: hidden;
 }	
 
 .hidden-tile{
