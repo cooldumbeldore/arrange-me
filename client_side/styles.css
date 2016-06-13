@@ -24,6 +24,16 @@ tr, td {
 	font-family: Arial;
 }
 
+.menu ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.menu ul, .menu li{
+	display: inline;
+}
+
 .tile{
 	
 }
@@ -64,26 +74,3 @@ tr, td {
 	width : 300px;
 }
 
-
-/*
-.rotate_animation {
-	-webkit-animation:spin 1s linear 1s;
-    -moz-animation:spin 1s linear 1s;
-    animation:spin 1s linear 1s;
-}
-
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg);
-
-*/
-/*
-@-webkit-keyframes cssAnimation {
-from {
--webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(100px);
-}
-to {
--webkit-transform: rotate(0deg) scale(2) skew(0deg) translate(100px);
-}
-}
-*/

@@ -241,16 +241,66 @@ function generate_board(dim){
 
 
 function rotate(tile_index){
-	cls_name = "rotateIn"
-	$('#tile'+tile_index).addClass("animated");
-	//$('#tile'+tile_index).removeClass("infinite");
-	$('#tile'+tile_index).addClass(cls_name);
-
-	setTimeout(function(){
-		$('#tile'+tile_index).removeClass("animated");
+	if(global_animation_flag){
+		cls_name = "rotateIn"
+		$('#tile'+tile_index).addClass("animated");
 		//$('#tile'+tile_index).removeClass("infinite");
-		$('#tile'+tile_index).removeClass(cls_name);
-	}, 1000);
+		$('#tile'+tile_index).addClass(cls_name);
+
+		setTimeout(function(){
+			$('#tile'+tile_index).removeClass("animated");
+			//$('#tile'+tile_index).removeClass("infinite");
+			$('#tile'+tile_index).removeClass(cls_name);
+		}, 1000);
+	}
+}
+
+function solve_board(){
+	var goal_matrix = [];
+	var current_state_matrix = [];
+	var missing_col = null; 
+	var missing_row = null;
+	for(var i = 1; i <= global_dim; i++){
+		goal_matrix.push([]);
+		current_state_matrix.push([]);
+		for(var j = 1; j <= global_dim; j++){
+			var tile_index = global_dim * i + j - global_dim;
+			goal_matrix[i - 1].push(tile_index);
+			goal_matrix[i - 1][j -1] = goal_matrix[i - 1][j -1] == global_dim * global_dim ? 0 : goal_matrix[i - 1][j -1];
+
+			current_state_matrix[i - 1].push(parseInt($("#tile"+tile_index).find("div").find("span").text()));
+			if(current_state_matrix[i - 1][j -1] == global_dim * global_dim){
+				current_state_matrix[i - 1][j -1] = 0;
+				missing_col = j;
+				missing_row = i;
+			}
+		}
+	}
+
+	var init = new Node(0, current_state_matrix, missing_row, missing_col, 0)
+	var goal = new Node(0, goal_matrix , global_dim, global_dim, 0)
+
+	var astar = new AStar(init, goal, 0)
+	// To measure time taken by the algorithm
+	var startTime = new Date()
+	// Execute AStar
+	var result = astar.execute()
+	// To measure time taken by the algorithm
+	var endTime = new Date()
+	alert('Completed in: ' + (endTime - startTime) + ' milliseconds')
+
+
+}
+
+function setup(){
+	missing_tile_index = global_dim * global_dim //parseInt(prompt("missing tile index:"))
+	global_hidden_tile_index = missing_tile_index
+	//build board
+	generate_board(global_dim)
+
+	// setup tiles
+	$('#tile'+missing_tile_index).addClass("hidden-tile");
+	generate_all_events(missing_tile_index);
 }
 
 function main(){
@@ -260,21 +310,15 @@ function main(){
 		alert("Not a valid dim choice!");
 		return;
 	}
-	missing_tile_index = global_dim * global_dim //parseInt(prompt("missing tile index:"))
-	global_hidden_tile_index = missing_tile_index
-	//build board
-	generate_board(global_dim)
-
-	// setup tiles
-	$('#tile'+missing_tile_index).addClass("hidden-tile");
-	generate_all_events(missing_tile_index);
+	setup();
 
 	// setup win message
 	$(".win-message").addClass("hidden");
 
-	//setup scramble button
+	//setup buttons
 	$('#scramble-button').click(scramble_board);
 	$('#undo-button').click(undo_last_move);
+	$('#solve-button').click(solve_board);
 }
 
 window.onload = function() {
