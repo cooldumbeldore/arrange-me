@@ -192,8 +192,8 @@ function scramble_board(){
 		tile_inbex = random_from(global_clickables);
 		$("#tile"+tile_inbex).click();
 	}
-	global_moves = []
-	update_move_counter()
+	global_moves = [];
+	update_move_counter();
 
 }
 
@@ -241,24 +241,23 @@ function generate_board(dim){
 
 
 function rotate(tile_index){
-	if(global_animation_flag){
-		cls_name = "rotateIn"
-		$('#tile'+tile_index).addClass("animated");
-		//$('#tile'+tile_index).removeClass("infinite");
-		$('#tile'+tile_index).addClass(cls_name);
+	cls_name = "rotateIn"
+	$('#tile'+tile_index).addClass("animated");
+	//$('#tile'+tile_index).removeClass("infinite");
+	$('#tile'+tile_index).addClass(cls_name);
 
-		setTimeout(function(){
-			$('#tile'+tile_index).removeClass("animated");
-			//$('#tile'+tile_index).removeClass("infinite");
-			$('#tile'+tile_index).removeClass(cls_name);
-		}, 1000);
-	}
+	setTimeout(function(){
+		$('#tile'+tile_index).removeClass("animated");
+		//$('#tile'+tile_index).removeClass("infinite");
+		$('#tile'+tile_index).removeClass(cls_name);
+	}, 1000);
+
 }
 
 function solve_board(){
 	var goal_matrix = [];
 	var current_state_matrix = [];
-	var missing_col = null; 
+	var missing_col = null;
 	var missing_row = null;
 	for(var i = 1; i <= global_dim; i++){
 		goal_matrix.push([]);
@@ -287,9 +286,15 @@ function solve_board(){
 	var result = astar.execute()
 	// To measure time taken by the algorithm
 	var endTime = new Date()
+	restart()
 	alert('Completed in: ' + (endTime - startTime) + ' milliseconds')
 
 
+}
+
+function restart(){
+	teardown()
+	setup()
 }
 
 function setup(){
@@ -301,6 +306,14 @@ function setup(){
 	// setup tiles
 	$('#tile'+missing_tile_index).addClass("hidden-tile");
 	generate_all_events(missing_tile_index);
+}
+
+function teardown(){
+	clear_all_events()
+	$('#table-div table').remove()
+	global_moves = []
+	update_move_counter()
+	
 }
 
 function main(){
